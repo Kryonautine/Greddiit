@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import SubgreddiitDetails from '../subgreddiit/subgreddiitDetails'
+import "./MySubgreddiits.css"
 
 const MySubgreddiits = () => {
 
 	const [subgreddiits, setSubgreddiits] = useState(null)
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState('')
-	const [desc, setDesc] = useState('')
+	const [description, setDesc] = useState('')
 	const [tags, setTags] = useState('')
-	const [banned, setBanned] = useState('')
+	const [banned_keywords, setBanned] = useState('')
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
@@ -32,7 +33,7 @@ const MySubgreddiits = () => {
 
 		if (name) {
 
-			const subgreddiit = {name, desc, tags, banned}
+			const subgreddiit = {name, description, tags, banned_keywords}
 			
 			const response = await fetch('/api/subgreddiit/', {
 				method: 'POST',
@@ -74,13 +75,13 @@ const MySubgreddiits = () => {
 					<input type="text" onChange={(e) => setName(e.target.value)} value={name}></input>
 				</label><br />
 				<label>Description:
-					<input type="text" onChange={(e) => setDesc(e.target.value)} value={desc}></input>
+					<input type="text" onChange={(e) => setDesc(e.target.value)} value={description}></input>
 				</label><br />
 				<label>Tags:
 					<input type="text" onChange={(e) => setTags(e.target.value)} value={tags}></input>
 				</label><br />
 				<label>Banned Keywords:
-					<input type="text" onChange={(e) => setBanned(e.target.value)} value={banned}></input>
+					<input type="text" onChange={(e) => setBanned(e.target.value)} value={banned_keywords}></input>
 				</label><br />
 				<input type="submit" onClick={CreateSubgreddiit}></input>
 			</form>
