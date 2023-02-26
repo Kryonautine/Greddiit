@@ -20,11 +20,11 @@ const userSchema = new Schema({
 		required: true
 	},
 	age: {
-		type: Number,
+		type: String,
 		required: false
 	},
 	contact_no: {
-		type: Number,
+		type: String,
 		required: false
 	},
 	password: {

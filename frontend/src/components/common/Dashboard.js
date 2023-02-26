@@ -10,7 +10,7 @@ const Dashboard = () => {
 		<header>
 			<div id="container">
 				<Link to="/profile"><AccountBoxIcon />My Profile</Link>
-				<Link to="/subgreddiits"><SourceIcon />My Subgreddiits</Link>
+				<Link to="/mysubgreddiits"><SourceIcon />My Subgreddiits</Link>
 				<Link to="/all"><LeaderboardIcon />All Subgreddiits</Link>
 				<Link to="/saved"><StarRateIcon />My Saved Posts</Link>
 			</div>

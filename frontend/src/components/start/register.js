@@ -19,7 +19,7 @@ export const Register = () => {
 		e.preventDefault()
     console.log('Default prevented')
 
-    if ((!name) || (!password) || (!email)) {
+    if ((name) && (password) && (email)) {
 
       const user = {firstname, lastname, name, password, email, age, phone}
       
@@ -153,7 +153,6 @@ export const Register = () => {
       </label>
       <br />
       <input type="button" className="button" onClick={handleSubmit}></input>
-      {error && <label id="errorMessage"> Name, Email and Password must be filled</label>}
     </form>
   );
 }

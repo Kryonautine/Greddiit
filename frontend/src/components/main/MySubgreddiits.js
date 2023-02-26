@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import SubgreddiitDetails from '../subgreddiit/subgreddiitDetails'
 
 const MySubgreddiits = () => {
 
+	const [subgreddiits, setSubgreddiits] = useState(null)
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState('')
 	const [desc, setDesc] = useState('')
@@ -9,12 +11,26 @@ const MySubgreddiits = () => {
 	const [banned, setBanned] = useState('')
 	const [error, setError] = useState(null)
 
-	const CreateSubgreddiit = async () => {
+	useEffect(() => {
+		const fetchSubgreddiits = async () => {
+			const response = await fetch('/api/subgreddiit')
+			const json = await response.json()
+
+			if (response.ok) {
+				setSubgreddiits(json)
+				console.log(json)
+			}
+		}
+
+		fetchSubgreddiits()
+	}, [])
+
+	const CreateSubgreddiit = async (e) => {
 
 		e.preventDefault()
 		console.log('Default prevented')
 
-		if (!name) {
+		if (name) {
 
 			const subgreddiit = {name, desc, tags, banned}
 			
@@ -51,9 +67,8 @@ const MySubgreddiits = () => {
 
 	return (
 		<>
-		<button onClick={() => setOpen(!login)}>Add a New Subgreddiit</button>
+		<button id="create" onClick={() => setOpen(!open)}>Add a New Subgreddiit</button>
 		{open && 
-			<>
 			<form>
 				<label>Name:
 					<input type="text" onChange={(e) => setName(e.target.value)} value={name}></input>
@@ -69,8 +84,12 @@ const MySubgreddiits = () => {
 				</label><br />
 				<input type="submit" onClick={CreateSubgreddiit}></input>
 			</form>
-			</>
 		}
+		<div className='Subgreddiits'>
+			{subgreddiits && subgreddiits.map((subgreddiit) => (
+				<SubgreddiitDetails key={subgreddiit._id} />
+			))}
+		</div>
 		</>
 	)
 }

@@ -1,0 +1,15 @@
+#create {
+	box-align: center;
+	width: 100px;
+	height: 40px;
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border-radius: 10px;
+}
+
+.Subgreddiits {
+	background-color: aquamarine;
+	color: #555;
+	border-radius: 4px;
+	padding: 20px;
+}
