@@ -1,0 +1,38 @@
+#loginform {
+	background-color: rgb(171, 244, 244);
+	border-radius: 30px;
+	height: 500px + 2vmin;
+	width: 400px + 1vmin;
+	padding: 20px;
+}
+
+#registerform {
+	background-color: rgb(171, 244, 244);
+	border-radius: 30px;
+	height: 1000px + 2vmin;
+	width: 400px + 1vmin;
+	padding: 20px;
+}
+
+.field {
+	color: rgb(0, 0, 0);
+}
+
+.input {
+	background-color: azure;
+	color: black;
+	padding: 10px;
+	margin: 10px;
+	box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+	border-radius:10px;
+	box-align: right;
+}
+
+.button {
+	box-align: center;
+	width: 100px;
+	height: 40px;
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border-radius: 10px;
+}
