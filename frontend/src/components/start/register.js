@@ -6,8 +6,12 @@ export const Register = () => {
 	const navigate = useNavigate();
 
 	const [name, setName] = useState('')
+	const [firstname, setFirstname] = useState('')
+	const [lastname, setLastname] = useState('')
 	const [password, setPassword] = useState('')
 	const [email, setEmail] = useState('')
+	const [age, setAge] = useState('')
+	const [phone, setPhone] = useState('')
 	const [error, setError] = useState(null)
 
 	const handleSubmit = async (e) => {
@@ -15,31 +19,44 @@ export const Register = () => {
 		e.preventDefault()
     console.log('Default prevented')
 
-		const user = {name, password, email}
-		
-		const response = await fetch('/api/user/', {
-			method: 'POST',
-			body: JSON.stringify(user),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		})
-    console.log('Response acquired')
-		const json = await response.json()
+    if ((!name) || (!password) || (!email)) {
 
-		if (!response.ok) {
-			setError(json.error)
-      console.log(error);
-		}
-		if (response.ok) {
-      localStorage.setItem('login', JSON.stringify(user))
-			setName('')
-			setPassword('')
-			setEmail('')
-			setError(null)
-			console.log('new user added', json)
-			navigate('/profile');
-		}
+      const user = {firstname, lastname, name, password, email, age, phone}
+      
+      const response = await fetch('/api/user/', {
+        method: 'POST',
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log('Response acquired')
+      const json = await response.json()
+
+      if (!response.ok) {
+        setError(json.error)
+        console.log(error);
+      }
+      if (response.ok) {
+        localStorage.setItem('login', JSON.stringify(user))
+
+        setName('')
+        setFirstname('')
+        setLastname('')
+        setPassword('')
+        setAge('')
+        setEmail('')
+        setPhone('')
+        setError(null)
+
+        console.log('new user added', json)
+        navigate('/profile');
+      }
+    }
+    else {
+      setError(1);
+      console.log("Full details not added")
+    }
 	}
 
 	return (
@@ -52,6 +69,8 @@ export const Register = () => {
           className="input"
           id="firstname"
           placeholder="First Name"
+          onChange={(e) => setFirstname(e.target.value)}
+          value={firstname}
         />
       </label>
       <br />
@@ -63,6 +82,8 @@ export const Register = () => {
           className="input"
           id="lastname"
           placeholder="Last Name"
+          onChange={(e) => setLastname(e.target.value)}
+          value={lastname}
         />
       </label>
       <br />
@@ -74,8 +95,8 @@ export const Register = () => {
           className="input"
           id="name"
           placeholder="Username"
-		  onChange={(e) => setName(e.target.value)}
-		  value={name}
+          onChange={(e) => setName(e.target.value)}
+          value={name}
         />
       </label>
       <br />
@@ -87,8 +108,8 @@ export const Register = () => {
           className="input"
           id="password"
           placeholder="Password"
-		  onChange={(e) => setPassword(e.target.value)}
-		  value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
       </label>
       <br />
@@ -100,8 +121,8 @@ export const Register = () => {
           className="input"
           id="email"
           placeholder="name@email.com"
-		  onChange={(e) => setEmail(e.target.value)}
-		  value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
       </label>
       <br />
@@ -113,6 +134,8 @@ export const Register = () => {
           className="input"
           id="age"
           placeholder="22"
+          onChange={(e) => setAge(e.target.value)}
+          value={age}
         />
       </label>
       <br />
@@ -124,10 +147,13 @@ export const Register = () => {
           className="input"
           id="phone"
           placeholder="123456789"
+          onChange={(e) => setPhone(e.target.value)}
+          value={phone}
         />
       </label>
       <br />
-      <input type="button" className="button" onClick={handleSubmit}>Submit</input>
+      <input type="button" className="button" onClick={handleSubmit}></input>
+      {error && <label id="errorMessage"> Name, Email and Password must be filled</label>}
     </form>
   );
 }

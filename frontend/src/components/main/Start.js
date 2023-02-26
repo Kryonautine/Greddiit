@@ -1,17 +1,8 @@
 import "./Start.css";
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import checkLogin from "../common/checkLogin";
 import {Register} from "../start/register";
 import {Login} from "../start/login";
-
-function checkLogin() {
-	const navigate = useNavigate();
-
-	if (window.localStorage.getItem('login')) {
-		console.log("Already Logged In")
-		navigate('/profile');
-	}
-}
 
 function Start() {
 

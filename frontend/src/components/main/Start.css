@@ -9,9 +9,13 @@
 #registerform {
 	background-color: rgb(171, 244, 244);
 	border-radius: 30px;
-	height: 1000px + 2vmin;
+	height: 1200px + 2vmin;
 	width: 400px + 1vmin;
 	padding: 20px;
+}
+
+#errormessage {
+	color: red;
 }
 
 .field {
