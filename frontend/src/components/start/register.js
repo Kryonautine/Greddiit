@@ -1,40 +1,49 @@
 import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
 
 export const Register = () => {
 
+	const navigate = useNavigate();
+
 	const [name, setName] = useState('')
-	const [pass, setPass] = useState('')
+	const [password, setPassword] = useState('')
 	const [email, setEmail] = useState('')
+	const [error, setError] = useState(null)
 
 	const handleSubmit = async (e) => {
 
 		e.preventDefault()
+    console.log('Default prevented')
 
-		const user = {name, pass, email}
+		const user = {name, password, email}
 		
-		const response = await fetch('/api/user', {
+		const response = await fetch('/api/user/', {
 			method: 'POST',
 			body: JSON.stringify(user),
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		})
+    console.log('Response acquired')
 		const json = await response.json()
 
 		if (!response.ok) {
 			setError(json.error)
+      console.log(error);
 		}
 		if (response.ok) {
+      localStorage.setItem('login', JSON.stringify(user))
 			setName('')
-			setPass('')
+			setPassword('')
 			setEmail('')
 			setError(null)
 			console.log('new user added', json)
+			navigate('/profile');
 		}
 	}
 
 	return (
-    <form className="form" id="registerform" onSubmit={handleSubmit}>
+    <form className="form" id="registerform">
       <label htmlFor="firstname" className="field">
         First name:{" "}
         <input
@@ -73,13 +82,13 @@ export const Register = () => {
       <label htmlFor="pass" className="field">
         Password:{" "}
         <input
-          refs="pass"
+          refs="password"
           type="text"
           className="input"
-          id="pass"
+          id="password"
           placeholder="Password"
-		  onChange={(e) => setPass(e.target.value)}
-		  value={pass}
+		  onChange={(e) => setPassword(e.target.value)}
+		  value={password}
         />
       </label>
       <br />
@@ -118,9 +127,7 @@ export const Register = () => {
         />
       </label>
       <br />
-      <button type="submit" className="button">
-        Submit
-      </button>
+      <input type="button" className="button" onClick={handleSubmit}>Submit</input>
     </form>
   );
 }

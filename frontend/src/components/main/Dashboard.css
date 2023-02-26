@@ -1,0 +1,13 @@
+#container {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	display: flex;
+	padding: 10px 20px;
+	align-items: center;
+	justify-content: space-between;
+	background-color: aliceblue;
+	color:black;
+	min-height: 0vh !important;
+	text-decoration: none;
+}
