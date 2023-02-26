@@ -87,7 +87,7 @@ const MySubgreddiits = () => {
 		}
 		<div className='Subgreddiits'>
 			{subgreddiits && subgreddiits.map((subgreddiit) => (
-				<SubgreddiitDetails key={subgreddiit._id} />
+				<SubgreddiitDetails key={subgreddiit._id} subgreddiit={subgreddiit} />
 			))}
 		</div>
 		</>
